@@ -1,0 +1,265 @@
+#popup {
+  position: fixed;
+  z-index: 1000;
+  top: 150px;
+  right: 100px;
+  width: 245px;
+  height: min-content;
+  background-color: white;
+  border: #e86658 2px solid;
+  border-radius: 20px;
+  transition: 2s ease-in-out;
+}
+
+#data_trajet {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: 15px;
+  position: fixed;
+  bottom: 55px;
+  left: 25px;
+  z-index: 1000;
+  height: 400px;
+  width: 350px;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.container_data {
+  display: flex;
+  justify-content: start;
+  gap: 5px;
+  background-color: green;
+}
+
+#container_affichage_vehicule {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#container_vehicules {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: 15px;
+  position: fixed;
+  bottom: 55px;
+  left: 25px;
+  z-index: 1000;
+  height: 400px;
+  width: 350px;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+#fermeture_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 35px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 12px;
+  left: 25px;
+  z-index: 1000;
+  border-radius: 10px;
+}
+
+#fermeture_container i {
+  scale: 1.5;
+}
+
+.hide {
+  display: none !important;
+}
+
+.container-vehicule {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.container-vehicule:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.image-container {
+  flex: 0 0 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vehicle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.vehicle-make {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.vehicle-model,
+.vehicle-version {
+  font-size: 14px;
+  margin: 0;
+  color: #666;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#data_itineraire {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 170px;
+  right: 100px;
+  width: 245px;
+  height: min-content;
+  background-color: white;
+  border: #e86658 2px solid;
+  border-radius: 20px;
+  transition: 2s ease-in-out;
+}
+
+#addressForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  top: 30px;
+  right: 100px;
+  z-index: 1000;
+  height: min-content;
+  width: 230px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 3px 6px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#addressForm input {
+  height: 20px;
+  border-radius: 10px;
+  border: 1.5px solid rgb(202, 22, 22);
+  outline: none;
+  text-decoration: none;
+  padding-left: 10px;
+}
+
+#addressForm_data {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#addressForm_input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#send {
+  border-radius: 10px;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  background-color: #fc8073;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  padding: 6px 10px 6px 10px;
+}
+
+#send:hover {
+  background-color: #ed5949;
+}
+
+#button_change {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  width: min-content;
+  height: min-content;
+  background-color: transparent;
+}
+
+#change {
+  font-size: 20px;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: #e86658;
+  border-radius: 10px;
+}
+
+#reset {
+  display: none;
+  font-size: 20px;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: #59ce51;
+  border-radius: 10px;
+}
+
+#addressForm input:focus {
+  border-color: #ed5949;
+  box-shadow: 0 0 5px rgba(237, 89, 73, 0.5);
+}

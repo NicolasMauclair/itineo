@@ -1,0 +1,87 @@
+import express from "express";
+import { createClient } from "@urql/core";
+import cors from 'cors';
+import { vehicleListQuery, getVehicleDetailsQuery } from "./queries.js";
+
+const app = express();
+app.use(cors());
+const port = 3000;
+
+// Configuration des en-têtes pour le client GraphQL
+const headers = {
+  "x-client-id": "677e4def4dd456c0206695fa",
+  "x-app-id": "677e4def4dd456c0206695fc",
+};
+
+// Initialisation du client GraphQL
+const client = createClient({
+  url: "https://api.chargetrip.io/graphql",
+  fetchOptions: {
+    method: "POST",
+    headers,
+  },
+});
+
+// Route pour récupérer la liste des véhicules
+app.get("/api/vehicles", async (req, res) => {
+  const { page = 0, size = 10, search = "" } = req.query;
+
+  try {
+    const response = await getVehicleList({ page, size, search }); // Appelle la fonction et attend sa résolution
+    res.json(response); // Renvoie les données obtenues
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to fetch vehicle list", details: error.message });
+  }
+});
+
+// Route pour récupérer les détails d'un véhicule spécifique
+app.get("/api/vehicles/:vehicleId", async (req, res) => {
+  const { vehicleId } = req.params;
+
+  try {
+    const response = await getVehicleDetails(vehicleId); // Appelle la fonction et attend sa résolution
+    res.json(response); // Renvoie les détails du véhicule
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to fetch vehicle details", details: error.message });
+  }
+});
+
+/**
+ * Fonction pour récupérer la liste des véhicules.
+ * @param { Object } options - Les paramètres pour la requête GraphQL.
+ * @param { number } options.page - Page actuelle.
+ * @param { number } options.size - Nombre d'éléments par page.
+ * @param { string } options.search - Mot-clé pour filtrer les résultats.
+ * @returns { Promise<Object> } - Les données de la liste des véhicules.
+ */
+export const getVehicleList = async ({ page, size = 10, search = "" }) => {
+  try {
+    const response = await client.query(vehicleListQuery, { page, size, search }).toPromise();
+    return response.data?.vehicleList || []; // Retourne la liste des véhicules ou un tableau vide
+  } catch (error) {
+    throw new Error("Failed to fetch vehicle list");
+  }
+};
+
+/**
+ * Fonction pour récupérer les détails d'un véhicule spécifique.
+ * @param { string } vehicleId - ID du véhicule à récupérer.
+ * @returns { Promise<Object> } - Les détails du véhicule.
+ */
+export const getVehicleDetails = async (vehicleId) => {
+  try {
+    const response = await client.query(getVehicleDetailsQuery, { vehicleId }).toPromise();
+    return response.data?.vehicle || {}; // Retourne les détails du véhicule ou un objet vide
+  } catch (error) {
+    throw new Error("Failed to fetch vehicle details");
+  }
+};
+
+// Lancer le serveur
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
