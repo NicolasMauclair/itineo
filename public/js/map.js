@@ -1,5 +1,5 @@
 // Fonction qui initialise la carte
-function initializeMap(map) {
+export function initializeMap(map) {
   if (map !== null) {
     map.remove(); // Supprime l'instance existante
   }
@@ -19,11 +19,62 @@ function initializeMap(map) {
 // ---------------------------------------------------------
 
 // Fonction pour réinitialiser la carte
-function resetMap(map) {
+export function resetMap(map) {
   map = initializeMap(map);
   document.getElementById("reset").style.display = "none";
   document.getElementById("data_itineraire").style.display = "none";
   document.getElementById("adresse_depart").value = "";
   document.getElementById("adresse_arrivee").value = "";
   return map;
+}
+
+
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+
+// Fonction qui dessine un trajet sur la map
+export function dessinerItineraire(route, map) {
+  let routeGeoJSON = {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        geometry: {
+          type: "LineString",
+          coordinates: route,
+        },
+        properties: {},
+      },
+    ],
+  };
+
+  L.geoJSON(routeGeoJSON, {
+    style: {
+      color: "blue",
+      weight: 4,
+      opacity: 0.7,
+    },
+  }).addTo(map);
+}
+
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+
+// Fonction qui définit un point sur la map
+export function dessinePoint(point, map) {
+  L.geoJSON(
+    [
+      {
+        type: "Point",
+        coordinates: point,
+      },
+    ],
+    {
+      style: {
+        color: "blue",
+        weight: 4,
+        opacity: 0.7,
+      },
+    }
+  ).addTo(map);
 }
