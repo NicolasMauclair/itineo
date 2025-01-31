@@ -1,5 +1,5 @@
 // Fonction pour calculer la distance entre deux coordonnées
-function calculateDistance(lat1, lon1, lat2, lon2) {
+export function calculateDistance(lat1, lon1, lat2, lon2) {
   const earthRadius = 6371000; // Rayon moyen de la Terre en mètres
 
   // Convertir les latitudes et longitudes de degrés en radians
@@ -26,7 +26,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 // ---------------------------------------------------------
 
 // Fonction pour obtenir les coordonnées d'une adresse
-async function getCoordinates(address) {
+export async function getCoordinates(address) {
   const api_key = "5b3ce3597851110001cf62481cf3c27900c544c0a862d7868924615a";
   const url = `https://api.openrouteservice.org/geocode/search?api_key=${api_key}&text=${encodeURIComponent(
     address
@@ -45,7 +45,7 @@ async function getCoordinates(address) {
 // ---------------------------------------------------------
 
 // Fonction pour obtenir le point le plus proche
-function getPointProche(lst_borne, point) {
+export function getPointProche(lst_borne, point) {
   let point_proche = lst_borne[0];
   let distance = calculateDistance(
     point_proche["ylatitude"],
@@ -73,7 +73,7 @@ function getPointProche(lst_borne, point) {
 // ---------------------------------------------------------
 
 // Fonction pour obtenir la borne la plus proche
-async function getBorneProximate(lst_point, worst_d, rayon) {
+export async function getBorneProximate(lst_point, worst_d, rayon) {
   let distance = 0;
   let currentPoint = 0;
 
@@ -106,7 +106,6 @@ async function getBorneProximate(lst_point, worst_d, rayon) {
       const response = await fetch(url);
       const result = await response.json();
       if (result["total_count"] > 0) {
-        
         // Récupère borne la plus proche
         let point_proche = getPointProche(
           result["results"],
@@ -130,10 +129,12 @@ async function getBorneProximate(lst_point, worst_d, rayon) {
 // ---------------------------------------------------------
 
 // Fonction pour obtenir l'itinéraire entre deux adresses
-async function getItineraire(departCoords, arriveeCoords) {
+export async function getItineraire(departCoords, arriveeCoords) {
+  console.log(departCoords, arriveeCoords);
+  console.log(departCoords[0], arriveeCoords[0]);
   const api_key = "5b3ce3597851110001cf62481cf3c27900c544c0a862d7868924615a";
   const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${api_key}&start=${departCoords[0]},${departCoords[1]}&end=${arriveeCoords[0]},${arriveeCoords[1]}`;
-
+  console.log(url);
   const response = await fetch(url);
   if (response.ok) {
     const data = await response.json();
@@ -145,7 +146,7 @@ async function getItineraire(departCoords, arriveeCoords) {
     let lst_point = data["features"][0]["geometry"]["coordinates"];
 
     // Affichage du bouton reset
-    document.getElementById("reset").style.display = "block";
+    //document.getElementById("reset").style.display = "block";
 
     return {
       lst_point: lst_point,
@@ -160,45 +161,46 @@ async function getItineraire(departCoords, arriveeCoords) {
 // ---------------------------------------------------------
 
 // Fonction pour récupérer la liste des véhicules
-async function recup_liste_vehicule() {
+export async function recup_liste_vehicule() {
   let res = [];
   try {
     // Récupération de la liste des véhicules
     const response = await fetch("http://localhost:3001/api/vehicles");
     if (!response.ok) {
-      throw new Error(`Erreur HTTP lors de la récupération des véhicules : ${response.status}`);
+      throw new Error(
+        `Erreur HTTP lors de la récupération des véhicules : ${response.status}`
+      );
     }
     const vehicles = await response.json();
 
     // Récupération des détails pour chaque véhicule
     for (const vehicle of vehicles) {
       try {
-        const detailsResponse = await fetch(`http://localhost:3001/api/vehicles/${vehicle.id}`);
+        const detailsResponse = await fetch(
+          `http://localhost:3001/api/vehicles/${vehicle.id}`
+        );
         if (!detailsResponse.ok) {
-          throw new Error(`Erreur HTTP pour le véhicule ${vehicle._id} : ${detailsResponse.status}`);
+          throw new Error(
+            `Erreur HTTP pour le véhicule ${vehicle._id} : ${detailsResponse.status}`
+          );
         }
         const details = await detailsResponse.json();
         res.push(details);
-
       } catch (error) {
-        console.error(`Erreur lors de la récupération des détails pour le véhicule ${vehicle._id} :`, error);
+        console.error(
+          `Erreur lors de la récupération des détails pour le véhicule ${vehicle._id} :`,
+          error
+        );
       }
     }
   } catch (error) {
-    console.error("Erreur lors de la récupération de la liste des véhicules :", error);
+    console.error(
+      "Erreur lors de la récupération de la liste des véhicules :",
+      error
+    );
   }
   return res;
 }
 
 // ---------------------------------------------------------
 // ---------------------------------------------------------
-
-// Export des fonctions
-export {
-  calculateDistance,
-  getCoordinates,
-  getBorneProximate,
-  getItineraire,
-  getPointProche,
-  recup_liste_vehicule
-};

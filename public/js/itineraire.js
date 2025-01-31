@@ -28,6 +28,7 @@ export async function recherche_trajet(
     }, 3000);
   } else {
     // Récupère l'itinéraire
+    console.log("departCoords", departCoords, "arriveeCoords", arriveeCoords);
     let res = await getItineraire(departCoords, arriveeCoords);
 
     // Vérifie que l'itinéraire existe
