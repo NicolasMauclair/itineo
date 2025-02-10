@@ -5,7 +5,7 @@ import { vehicleListQuery, getVehicleDetailsQuery } from "./queries.js";
 
 const app = express();
 app.use(cors());
-const port = 3000;
+const port = 3001;
 
 // Configuration des en-têtes pour le client GraphQL
 const headers = {

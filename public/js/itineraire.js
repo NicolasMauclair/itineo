@@ -3,9 +3,9 @@ import {
   getBorneProximate,
   getItineraire,
   recup_liste_vehicule,
-} from "../function.js";
+} from "./function.js";
 import { dessinePoint, dessinerItineraire } from "./map.js";
-import { affichePopup, desactivePopup } from "./ui.js";
+import { afficheError } from "./ui.js";
 import { afficheVehicule } from "./vehicule.js";
 
 // Fonction pour rechercher un trajet
@@ -16,19 +16,17 @@ export async function recherche_trajet(
   worst_d,
   rayon
 ) {
+
   // Récupère les coordonnées des deux adresses
   const departCoords = await getCoordinates(adresse_depart);
   const arriveeCoords = await getCoordinates(adresse_arrivee);
 
   // Vérifie que les 2 adresses récupérées existent
   if (departCoords == null || arriveeCoords == null) {
-    affichePopup("Adresse introuvable");
-    setTimeout(function () {
-      desactivePopup();
-    }, 3000);
+    afficheError("Une adresse n'existe pas");
+
   } else {
     // Récupère l'itinéraire
-    console.log("departCoords", departCoords, "arriveeCoords", arriveeCoords);
     let res = await getItineraire(departCoords, arriveeCoords);
 
     // Vérifie que l'itinéraire existe
@@ -39,9 +37,7 @@ export async function recherche_trajet(
       // Trajet est réalisable sans passer par une borne
       if (data_stat["distance"] < worst_d * 1000) {
         dessinerItineraire(res["lst_point"], map);
-
       } else {
-
         // Récupère la borne la plus proche
         let lst_borne = await getBorneProximate(lst_point, worst_d, rayon);
 
@@ -57,17 +53,17 @@ export async function recherche_trajet(
           }
         }
       }
+
       desactivePopup();
 
       let lst_vehicule = await recup_liste_vehicule();
       if (lst_vehicule.length > 0) {
-        afficheVehicule(lst_vehicule, data_stat["distance"]/1000);
+        afficheVehicule(lst_vehicule, data_stat["distance"] / 1000);
       }
+
+    // Aucun trajet récupéré
     } else {
-      affichePopup("Itinéraire introuvable");
-      setTimeout(function () {
-        desactivePopup();
-      }, 3000);
+      afficheError("L'itinéraire n'a pas été trouvé");
     }
   }
 }

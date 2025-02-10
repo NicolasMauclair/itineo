@@ -35,6 +35,7 @@ async function callCalcCout(distance, vitesse, energie) {
 // Fonction qui affiche la liste des véhicules
 export async function afficheVehicule(lst_vehicule, distance) {
   let container = document.getElementById("container_vehicules");
+  container.classList.remove("hide");
   for (let voiture of lst_vehicule) {
     let containerVehicule = create(
       "div",

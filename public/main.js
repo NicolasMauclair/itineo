@@ -1,7 +1,5 @@
-import { initializeMap, resetMap } from "./map.js";
-import { affichePopup } from "./ui.js";
-import { recherche_trajet } from "./itineraire.js";
-
+import { initializeMap, resetMap } from "./js/map.js";
+import { recherche_trajet } from "./js/itineraire.js";
 
 // ------------------------- INITIALISATION -------------------------
 
@@ -11,26 +9,33 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
 });
 
-
 // ------------------------- GESTION DES ÉVÉNEMENTS -------------------------
 
 function setupEventListeners() {
   // Fermeture des données véhicules
-  document.getElementById("fermeture_data_vehicule").addEventListener("click", toggleDataVehicule);
+  document
+    .getElementById("fermeture_data_vehicule")
+    ?.addEventListener("click", toggleDataVehicule);
 
   // Gestion de l'affichage des véhicules
-  document.getElementById("fermeture_container").addEventListener("click", toggleVehiculeContainer);
+  document
+    .getElementById("fermeture_container")
+    ?.addEventListener("click", toggleVehiculeContainer);
 
   // Recherche du trajet
-  document.getElementById("addressForm").addEventListener("submit", rechercherTrajet);
+  document
+    .getElementById("addressForm")
+    ?.addEventListener("submit", rechercherTrajet);
 
   // Bouton pour échanger les adresses
-  document.getElementById("change").addEventListener("click", echangerAdresses);
+  document.getElementById("change")?.addEventListener("click", echangerAdresses);
 
   // Bouton pour réinitialiser la carte
-  document.getElementById("reset").addEventListener("click", resetCarte);
-}
+  document.getElementById("reset")?.addEventListener("click", resetCarte);
 
+  // Gestion de l'overlay et de la pop-up
+  document.getElementById("button_error")?.addEventListener("click", fermerPopup);
+}
 
 // ------------------------------- FONCTIONS -------------------------------
 
@@ -48,13 +53,16 @@ function toggleVehiculeContainer() {
   icone.classList.toggle("bx-chevron-up");
 }
 
-function rechercherTrajet(event) {
+function fermerPopup() {
+  document.getElementById("popup_error").classList.toggle("hide");
+  document.getElementById("overlay").classList.toggle("overlay-active");
+}
+
+async function rechercherTrajet(event) {
   event.preventDefault();
 
   const adresse_depart = document.getElementById("adresse_depart").value;
   const adresse_arrivee = document.getElementById("adresse_arrivee").value;
-
-  affichePopup("Recherche en cours...");
   recherche_trajet(maps, adresse_depart, adresse_arrivee, 200, 10);
 }
 
@@ -62,7 +70,10 @@ function echangerAdresses() {
   let departInput = document.getElementById("adresse_depart");
   let arriveeInput = document.getElementById("adresse_arrivee");
 
-  [departInput.value, arriveeInput.value] = [arriveeInput.value, departInput.value];
+  [departInput.value, arriveeInput.value] = [
+    arriveeInput.value,
+    departInput.value,
+  ];
 }
 
 function resetCarte() {

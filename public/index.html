@@ -5,36 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map with Route</title>
+
+    <!-- Feuille de style principale -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Feuille de style pour Leaflet (librairie cartographique) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Icônes Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Script Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="js/main.js"></script>
+
+    <!-- Script principal en module -->
+    <script type="module" src="main.js"></script>
+
+    <!-- Librairie Axios pour les requêtes HTTP -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div>
 
-        <div id="container_affichage_vehicule">
+        <!-- Conteneur affichant les véhicules disponibles -->
+        <div id="container_affichage_vehicule" class="hide">
             <div id="container_vehicules"></div>
-            <div id="fermeture_container"><i id="fermeture_icon" class='bx bx-chevron-down'></i></div>
+            <div id="fermeture_container">
+                <!-- Icône pour fermer la liste des véhicules -->
+                <i id="fermeture_icon" class='bx bx-chevron-down'></i>
+            </div>
         </div>
 
-        <div id="popup" class="hide">
-            <p id="message_popup"></p>
+        <!-- Overlay utilisé pour masquer le contenu en arrière-plan -->
+        <div id="overlay"></div>
+
+        <!-- Pop-up d'erreur affiché en cas de problème avec l'itinéraire -->
+        <div id="popup_error" class="hide">
+            <div>
+                <i class='bx bxs-error'></i>
+                <p id="message_error">Aïe, fausse route !</p>
+                <p id="error_type">L'itinéraire recherché n'a pas été trouvé</p>
+            </div>
+            <button id="button_error">Retour</button>
         </div>
 
+        <!-- Conteneur des informations de trajet -->
         <div id="data_trajet" class="hide">
+            <!-- Bouton pour fermer les informations -->
             <i id="fermeture_data_vehicule" class='bx bx-chevron-left'></i>
         </div>
 
+        <!-- Formulaire pour entrer les adresses de départ et d'arrivée -->
         <form id="addressForm">
             <div id="addressForm_data">
                 <div id="addressForm_input">
                     <input type="text" id="adresse_depart" name="adresse_depart" placeholder="Départ" required>
                     <input type="text" id="adresse_arrivee" name="adresse_arrivee" placeholder="Arrivée" required>
                 </div>
+                <!-- Boutons pour permuter ou réinitialiser les adresses -->
                 <div id="button_change" aria-label="Permuter les adresses">
                     <i id="change" class='bx bx-sync'></i>
                     <i id="reset" class='bx bx-reset'></i>
@@ -42,14 +71,20 @@
             </div>
             <button id="send" type="submit">Envoyer</button>
         </form>
+
+        <!-- Message d'erreur affiché si une adresse est incorrecte -->
         <div id="error_message" class="hide">
             <p>L'une des adresses n'est pas répertoriée</p>
         </div>
+
+        <!-- Informations sur l'itinéraire calculé -->
         <div id="data_itineraire">
             <p id="duree"></p>
             <p id="distance"></p>
         </div>
     </div>
+
+    <!-- Conteneur de la carte Leaflet -->
     <div id="map" style="width: 100%; height: 700px;"></div>
 </body>
 

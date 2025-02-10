@@ -1,16 +1,6 @@
-// Fonction pour afficher une pop-up
-export function affichePopup(msg) {
-  let popup = document.getElementById("popup");
-  let msg_popup = document.getElementById("message_popup");
-  popup.classList.remove("hide");
-  msg_popup.innerHTML = msg;
-}
-
-// ---------------------------------------------------------
-// ---------------------------------------------------------
-
-// Fonction pour désactiver une pop-up
-export function desactivePopup() {
-  let popup = document.getElementById("popup");
-  popup.classList.add("hide");
+// Fonction pour afficher une pop-up d'erreur
+export function afficheError(msg) {
+  document.getElementById("popup_error").classList.toggle("hide");
+  document.getElementById("overlay").classList.toggle("overlay-active");
+  document.getElementById("error_type").innerHTML = msg;
 }

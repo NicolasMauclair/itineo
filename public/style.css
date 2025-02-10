@@ -1,6 +1,7 @@
+/* ----- POPUP ----- */
 #popup {
   position: fixed;
-  z-index: 1000;
+  z-index: 998;
   top: 150px;
   right: 100px;
   width: 245px;
@@ -11,7 +12,83 @@
   transition: 2s ease-in-out;
 }
 
-#data_trajet {
+#popup_error {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  width: 245px;
+  height: 200px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transform: translate(-50%, -50%);
+}
+
+#popup_error div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: max-content;
+  gap: 10px;
+}
+
+#popup_error i {
+  padding-top: 20px;
+  color: #de5c4d;
+  scale: 2;
+  height: 35px;
+}
+
+#message_error {
+  font-weight: bold;
+  font-size: large;
+}
+
+#popup_error p {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#button_error {
+  width: 245px;
+  height: 40px;
+  text-decoration: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  background-color: #de5c4d;
+  cursor: pointer;
+}
+
+#button_error:hover {
+  background-color: #d14839;
+}
+
+/* ----- OVERLAY ----- */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.overlay-active {
+  display: block !important;
+}
+
+/* ----- DATA TRAJET & VEHICULE ----- */
+#data_trajet, #container_vehicules {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -20,7 +97,7 @@
   position: fixed;
   bottom: 55px;
   left: 25px;
-  z-index: 1000;
+  z-index: 998;
   height: 400px;
   width: 350px;
   padding: 5px;
@@ -28,61 +105,12 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-}
-
-.container_data {
-  display: flex;
-  justify-content: start;
-  gap: 5px;
-  background-color: green;
 }
 
 #container_affichage_vehicule {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-#container_vehicules {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-  gap: 15px;
-  position: fixed;
-  bottom: 55px;
-  left: 25px;
-  z-index: 1000;
-  height: 400px;
-  width: 350px;
-  padding: 5px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-}
-
-#fermeture_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 350px;
-  height: 35px;
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  bottom: 12px;
-  left: 25px;
-  z-index: 1000;
-  border-radius: 10px;
-}
-
-#fermeture_container i {
-  scale: 1.5;
-}
-
-.hide {
-  display: none !important;
 }
 
 .container-vehicule {
@@ -133,13 +161,13 @@
   color: #333;
 }
 
-.vehicle-model,
-.vehicle-version {
+.vehicle-model, .vehicle-version {
   font-size: 14px;
   margin: 0;
   color: #666;
 }
 
+/* ----- SCROLLBAR ----- */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -158,20 +186,7 @@
   background: #555;
 }
 
-#data_itineraire {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  top: 170px;
-  right: 100px;
-  width: 245px;
-  height: min-content;
-  background-color: white;
-  border: #e86658 2px solid;
-  border-radius: 20px;
-  transition: 2s ease-in-out;
-}
-
+/* ----- FORMULAIRE ----- */
 #addressForm {
   display: flex;
   flex-direction: column;
@@ -179,14 +194,13 @@
   position: fixed;
   top: 30px;
   right: 100px;
-  z-index: 1000;
+  z-index: 998;
   height: min-content;
   width: 230px;
   padding: 10px;
   border-radius: 20px;
   background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 3px 6px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 3px 6px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 #addressForm input {
@@ -206,12 +220,6 @@
   align-items: center;
 }
 
-#addressForm_input {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 #send {
   border-radius: 10px;
   color: white;
@@ -221,45 +229,29 @@
   border: none;
   outline: none;
   text-decoration: none;
-  padding: 6px 10px 6px 10px;
+  padding: 6px 10px;
 }
 
 #send:hover {
   background-color: #ed5949;
 }
 
-#button_change {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  border: none;
-  outline: none;
-  text-decoration: none;
-  width: min-content;
-  height: min-content;
-  background-color: transparent;
-}
-
-#change {
+#change, #reset {
   font-size: 20px;
   padding: 5px;
   cursor: pointer;
   color: white;
-  background-color: #e86658;
   border-radius: 10px;
 }
 
-#reset {
-  display: none;
-  font-size: 20px;
-  padding: 5px;
-  cursor: pointer;
-  color: white;
-  background-color: #59ce51;
-  border-radius: 10px;
-}
+#change { background-color: #e86658; }
+#reset { display: none; background-color: #59ce51; }
 
 #addressForm input:focus {
   border-color: #ed5949;
   box-shadow: 0 0 5px rgba(237, 89, 73, 0.5);
+}
+
+.hide {
+  display: none !important;
 }

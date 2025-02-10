@@ -7,6 +7,7 @@ import {
   getPointProche,
   getBorneProximate,
 } from "../public/function.js";
+
 const app = express();
 const port = 3000;
 import cors from "cors";
@@ -62,7 +63,6 @@ app.get("/getListeVehicule", async (req, res) => {
     });
   }
 });
-
 
 // Endpoints - Récupérer les détails d'un véhicule à partir de son ID
 app.get('/getDetailVehicule/:vehicleId', async (req, res) => {

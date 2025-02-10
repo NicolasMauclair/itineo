@@ -130,13 +130,16 @@ export async function getBorneProximate(lst_point, worst_d, rayon) {
 
 // Fonction pour obtenir l'itinéraire entre deux adresses
 export async function getItineraire(departCoords, arriveeCoords) {
-  console.log(departCoords, arriveeCoords);
-  console.log(departCoords[0], arriveeCoords[0]);
   const api_key = "5b3ce3597851110001cf62481cf3c27900c544c0a862d7868924615a";
   const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${api_key}&start=${departCoords[0]},${departCoords[1]}&end=${arriveeCoords[0]},${arriveeCoords[1]}`;
-  console.log(url);
-  const response = await fetch(url);
-  if (response.ok) {
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      return null
+    }
+
     const data = await response.json();
 
     // Statistiques de l'itinéraire
@@ -145,17 +148,16 @@ export async function getItineraire(departCoords, arriveeCoords) {
     // Liste des coordonnées de l'itinéraire
     let lst_point = data["features"][0]["geometry"]["coordinates"];
 
-    // Affichage du bouton reset
-    //document.getElementById("reset").style.display = "block";
-
     return {
       lst_point: lst_point,
       data_stat: data_stat,
     };
-  } else {
+
+  } catch (error) {
     return null;
   }
 }
+
 
 // ---------------------------------------------------------
 // ---------------------------------------------------------
