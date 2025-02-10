@@ -6,7 +6,7 @@ import {
   recup_liste_vehicule,
   getPointProche,
   getBorneProximate,
-} from "../public/function.js";
+} from "../public/js/function.js";
 
 const app = express();
 const port = 3000;

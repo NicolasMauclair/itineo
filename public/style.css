@@ -111,6 +111,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  z-index: 998;
 }
 
 .container-vehicule {
@@ -166,6 +167,29 @@
   margin: 0;
   color: #666;
 }
+
+#fermeture_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  z-index: 998;
+  height: 25px;
+  width: 350px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+#fermeture_icon {
+  scale: 1.5;
+}
+
 
 /* ----- SCROLLBAR ----- */
 ::-webkit-scrollbar {

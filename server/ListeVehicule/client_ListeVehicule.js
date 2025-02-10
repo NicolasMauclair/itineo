@@ -1,5 +1,5 @@
 import express from "express";
-import { createClient } from "@urql/core";
+import { createClient, cacheExchange, fetchExchange } from "@urql/core";
 import cors from 'cors';
 import { vehicleListQuery, getVehicleDetailsQuery } from "./queries.js";
 
@@ -16,6 +16,7 @@ const headers = {
 // Initialisation du client GraphQL
 const client = createClient({
   url: "https://api.chargetrip.io/graphql",
+  exchanges: [cacheExchange, fetchExchange], 
   fetchOptions: {
     method: "POST",
     headers,
