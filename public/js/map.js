@@ -21,13 +21,8 @@ export function initializeMap(map) {
 // Fonction pour réinitialiser la carte
 export function resetMap(map) {
   map = initializeMap(map);
-  document.getElementById("reset").style.display = "none";
-  document.getElementById("data_itineraire").style.display = "none";
-  document.getElementById("adresse_depart").value = "";
-  document.getElementById("adresse_arrivee").value = "";
   return map;
 }
-
 
 // ---------------------------------------------------------
 // ---------------------------------------------------------

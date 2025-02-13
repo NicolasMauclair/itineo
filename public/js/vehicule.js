@@ -1,7 +1,7 @@
 import { create } from "./utils.js";
-/*
+
 async function callCalcCout(distance, vitesse, energie) {
-  const url = "http://localhost:8000/?wsdl"; // URL du WSDL du service SOAP
+  const url = "http://localhost:8000/?wsdl";
   const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://localhost:8000">
      <soapenv:Header/>
@@ -14,23 +14,23 @@ async function callCalcCout(distance, vitesse, energie) {
      </soapenv:Body>
   </soapenv:Envelope>`;
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "text/xml; charset=utf-8",
-      SOAPAction: "http://localhost:8000/calc_cout", // Action SOAP pour calc_cout
-    },
-    body: soapRequest,
-  });
-
-  const text = await response.text(); // Réponse en XML
-  const parser = new DOMParser();
-  const xmlDoc = parser.parseFromString(text, "text/xml");
-  const result =
-    xmlDoc.getElementsByTagName("calc_coutResponse")[0].textContent;
-  return result;
+  try {
+    const response = await fetch("http://localhost:8000/?wsdl", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/soap+xml",
+      },
+      body: soapRequest,
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch: " + response.statusText);
+    }
+    const data = await response.text();
+    console.log("Reponse: ", data);
+  } catch (error) {
+    console.error("Une erreur est survenue lors du calcul du coût :", error);
+  }
 }
-*/
 
 // Fonction qui affiche la liste des véhicules
 export async function afficheVehicule(lst_vehicule, distance) {
@@ -87,8 +87,8 @@ export async function afficheVehicule(lst_vehicule, distance) {
         }
       });
 
-      create("p", vehicule_data, lst_vehicule[i].naming.make);
       create("h3", vehicule_data, lst_vehicule[i].naming.model);
+      create("p", vehicule_data, lst_vehicule[i].naming.make);
 
       let container_data1 = create(
         "div",
@@ -120,11 +120,10 @@ export async function afficheVehicule(lst_vehicule, distance) {
     });
   }
 
-  /*
   try {
-    const cout = await callCalcCout(distance, 100, 0.2); // Exemple de paramètres pour calc_cout
+    const cout = await callCalcCout(distance, 100.0, 0.2);
     console.log("Coût calculé:", cout);
-  } catch {}
-   */
-  
+  } catch (error) {
+    console.error("Une erreur est survenue lors du calcul du coût :", error);
+  }
 }

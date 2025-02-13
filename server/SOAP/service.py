@@ -1,31 +1,51 @@
-from spyne import Application, rpc, ServiceBase, Iterable, Unicode, Integer, Float
-from spyne.server.wsgi import WsgiApplication
+from spyne import Application, rpc, ServiceBase, Float
 from spyne.protocol.soap import Soap11
+from spyne.server.wsgi import WsgiApplication
+from wsgiref.simple_server import make_server
 
-# source env/Scripts/activate
+class VehiculeService(ServiceBase):
+    @rpc(Float, Float, _returns=Float)
+    def calculer_cout(ctx, distance, consommation):
+        """ Calcule le coût d'un trajet en fonction de la distance et de la consommation. """
+        prix_carburant = 1.8  # Prix du carburant au litre
+        cout = (distance / 100) * consommation * prix_carburant
+        return round(cout, 2)
 
-class soap_info(ServiceBase):
-    @rpc(Float, Integer, Float, Float, _returns=Float)
-    def calc_time(ctx, charge, nb_charge, distance, moy_vitesse):
-        tps_recharge = charge * nb_charge
-        tps_conduite = distance / moy_vitesse
-        return tps_recharge + tps_conduite
-
-    @rpc(Float, Float, Float, _returns=Float)
-    def calc_cout(ctx, conso, autonomie, prix_kwh):
-        nb_kwh = (conso * autonomie) / 100
-        return prix_kwh * nb_kwh
-
+# Création de l'application SOAP
 application = Application(
-    [soap_info],
-    'spyne.examples.hello.soap',
-    in_protocol=Soap11(validator='lxml'),
+    [VehiculeService],
+    tns='spyne.vehicule.service',
+    in_protocol=Soap11(),
     out_protocol=Soap11()
 )
+
 wsgi_application = WsgiApplication(application)
 
+# Middleware pour ajouter les en-têtes CORS
+class CORSMiddleware:
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        def custom_start_response(status, headers, exc_info=None):
+            headers.append(('Access-Control-Allow-Origin', '*'))  # Remplace par ton IP si besoin
+            headers.append(('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'))
+            headers.append(('Access-Control-Allow-Headers', 'Content-Type, Authorization, SOAPAction'))
+            
+            # Si la requête est OPTIONS, on renvoie une réponse vide avec 200 OK
+            if environ.get('REQUEST_METHOD') == 'OPTIONS':
+                status = '200 OK'
+                headers.append(('Content-Length', '0'))
+                return start_response(status, headers, exc_info)
+            
+            return start_response(status, headers, exc_info)
+
+        return self.app(environ, custom_start_response)
+
+# Application avec le middleware CORS
+wsgi_application = CORSMiddleware(wsgi_application)
+
 if __name__ == '__main__':
-    from wsgiref.simple_server import make_server
-    server = make_server('127.0.0.1', 8000, wsgi_application)
-    print("Server is running on http://127.0.0.1:8000")
+    server = make_server('0.0.0.0', 8000, wsgi_application)
+    print("Serveur SOAP en cours d'exécution sur http://localhost:8000/?wsdl")
     server.serve_forever()

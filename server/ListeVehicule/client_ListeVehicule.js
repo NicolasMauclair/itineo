@@ -28,8 +28,8 @@ app.get("/api/vehicles", async (req, res) => {
   const { page = 0, size = 10, search = "" } = req.query;
 
   try {
-    const response = await getVehicleList({ page, size, search }); // Appelle la fonction et attend sa résolution
-    res.json(response); // Renvoie les données obtenues
+    const response = await getVehicleList({ page, size, search }); 
+    res.json(response);
   } catch (error) {
     res
       .status(500)
@@ -42,8 +42,8 @@ app.get("/api/vehicles/:vehicleId", async (req, res) => {
   const { vehicleId } = req.params;
 
   try {
-    const response = await getVehicleDetails(vehicleId); // Appelle la fonction et attend sa résolution
-    res.json(response); // Renvoie les détails du véhicule
+    const response = await getVehicleDetails(vehicleId);
+    res.json(response);
   } catch (error) {
     res
       .status(500)
