@@ -64,12 +64,6 @@ export async function afficheVehicule(lst_vehicule, distance) {
     );
     create("h3", dataContainer, voiture.naming.make, "vehicle-make");
     create("p", dataContainer, voiture.naming.model, "vehicle-model");
-    create(
-      "p",
-      dataContainer,
-      `Version: ${voiture.naming.chargetrip_version}`,
-      "vehicle-version"
-    );
   }
 
   let container_vehicules = document.getElementById("container_vehicules");
