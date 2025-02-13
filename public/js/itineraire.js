@@ -2,18 +2,16 @@ import {
   getCoordinates,
   getBorneProximate,
   getItineraire,
-  recup_liste_vehicule,
 } from "./function.js";
 import { dessinePoint, dessinerItineraire } from "./map.js";
 import { afficheError } from "./ui.js";
-import { afficheVehicule } from "./vehicule.js";
 
 export function addMarker(map, lat, lng, iconUrl) {
   const customIcon = L.icon({
     iconUrl: iconUrl,
-    iconSize: [32, 32], // Taille de l'icône
-    iconAnchor: [7, 32], // Point d'ancrage de l'icône
-    popupAnchor: [0, -32], // Position de la pop-up par rapport à l'icône
+    iconSize: [32, 32],
+    iconAnchor: [7, 32],
+    popupAnchor: [0, -32],
   });
 
   L.marker([lat, lng], { icon: customIcon }).addTo(map);
@@ -66,6 +64,8 @@ export async function recherche_trajet(
         }
         addMarker(map, arriveeCoords[1], arriveeCoords[0], "flag.svg");
       }
+
+      return data_stat = res["data_stat"];
 
       // Aucun trajet récupéré
     } else {

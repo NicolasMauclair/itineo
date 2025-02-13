@@ -1,7 +1,7 @@
 // ------------------------- IMPORTS -------------------------
 import { initializeMap, resetMap } from "./js/map.js";
 import { recherche_trajet } from "./js/itineraire.js";
-import { recup_liste_vehicule } from "./js/function.js";
+import { recup_liste_vehicule, secondToHour } from "./js/function.js";
 import { afficheVehicule } from "./js/vehicule.js";
 import { afficheError } from "./js/ui.js";
 
@@ -12,14 +12,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupEventListeners();
 
   try {
-
     // Récupération de la liste des véhicules
     let lst_vehicule = await recup_liste_vehicule();
 
     if (lst_vehicule.length > 0) {
       // Choix du trajet réalisé
       document.getElementById("send").addEventListener("click", async () => {
-
         // Affichage de la liste des véhicules
         await afficheVehicule(lst_vehicule, 5);
 
@@ -35,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               document.getElementById("chargement").classList.add("active");
 
               // Recherche du trajet
-              await recherche_trajet(
+              const result = await recherche_trajet(
                 maps,
                 document.getElementById("adresse_depart").value,
                 document.getElementById("adresse_arrivee").value,
@@ -43,8 +41,20 @@ document.addEventListener("DOMContentLoaded", async () => {
                 10
               );
 
-              document.getElementById("chargement").classList.remove("active");
+              document
+                .getElementById("data_trajet_temps")
+                .classList.remove("hide");
+              document
+                .getElementById("data_trajet_distance")
+                .classList.remove("hide");
 
+              document.getElementById("distance-data").innerText =
+                result.distance / 1000 + " km";
+              document.getElementById("temps-data").innerText = secondToHour(
+                result.duration
+              );
+
+              document.getElementById("chargement").classList.remove("active");
             });
           });
       });
@@ -75,6 +85,8 @@ function afficherChoixVehicule() {
 function afficherChoixDestination() {
   document.getElementById("vehiculeForm").classList.toggle("hide");
   document.getElementById("addressForm").classList.remove("hide");
+  document.getElementById("data_trajet_temps").classList.toggle("hide");
+  document.getElementById("data_trajet_distance").classList.toggle("hide");
   maps = resetMap(maps);
 }
 

@@ -350,6 +350,36 @@
   transition: all 0.5s ease-in-out;
 }
 
+#data_trajet_temps, #data_trajet_distance {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: #f9f9f9;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#data_trajet_temps {
+  z-index: 999;
+  position: fixed;
+  bottom: 20px;
+  left: 65%;
+
+}
+
+#data_trajet_distance {
+  z-index: 999;
+  position: fixed;
+  bottom: 20px;
+  left: 25%;
+}
+
+
 .active {
   transition: all 1s ease-in-out;
   transform: translate(-50%, 200px) !important;

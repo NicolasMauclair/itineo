@@ -206,3 +206,10 @@ export async function recup_liste_vehicule() {
 
 // ---------------------------------------------------------
 // ---------------------------------------------------------
+
+export function secondToHour(second) {
+  const hours = Math.floor(second / 3600);
+  const minutes = Math.floor((second % 3600) / 60);
+  const seconds = second % 60;
+  return `${hours}h${minutes}min`;
+}
