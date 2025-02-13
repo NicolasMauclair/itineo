@@ -29,15 +29,6 @@
 <body>
     <div>
 
-        <!-- Conteneur affichant les véhicules disponibles -->
-        <div id="container_affichage_vehicule">
-            <div id="container_vehicules"></div>
-            <div id="fermeture_container">
-                <!-- Icône pour fermer la liste des véhicules -->
-                <i id="fermeture_icon" class='bx bx-chevron-down'></i>
-            </div>
-        </div>
-
         <!-- Overlay utilisé pour masquer le contenu en arrière-plan -->
         <div id="overlay"></div>
 
@@ -58,8 +49,8 @@
         </div>
 
         <!-- Formulaire pour entrer les adresses de départ et d'arrivée -->
-        <form id="addressForm">
-            
+        <div id="addressForm">
+
             <h3>Itineo</h3>
             <div id="addressForm_data">
                 <img id="point" src="point.svg">
@@ -74,11 +65,29 @@
                     <img id="change" src="arrow.svg" alt="Permuter les adresses">
                 </div>
             </div>
-            <button id="send" type="submit">Envoyer</button>
+            <button id="send" type="submit">Suivant</button>
             <!--<div class="barre"></div>-->
-        </form>
+        </div>
 
-        
+        <div id="vehiculeForm">
+
+            <h3>Itineo</h3>
+
+            <!-- Conteneur affichant les véhicules disponibles -->
+            <div id="container_vehicules"></div>
+            <div id="fermeture_container">
+                <!-- Icône pour fermer la liste des véhicules -->
+                <i id="fermeture_icon" class='bx bx-chevron-right'></i>
+            </div>
+
+            <div id="button-container">
+                <button id="back"><i class='bx bx-left-arrow-alt'></i></button>
+                <button id="send" type="submit">Envoyer</button></button>
+            </div>
+
+        </div>
+
+
 
     </div>
 

@@ -29,11 +29,10 @@ function setupEventListeners() {
     .getElementById("fermeture_container")
     ?.addEventListener("click", toggleVehiculeContainer);
 
-  // Recherche du trajet
+  // Choix du véhicule
   document
-    .getElementById("addressForm")
-    ?.addEventListener("submit", rechercherTrajet);
-
+  .getElementById("addressForm")
+  ?.addEventListener("click", chooseVehicule);
   // Bouton pour échanger les adresses
   document
     .getElementById("change")
@@ -49,6 +48,11 @@ function setupEventListeners() {
 }
 
 // ------------------------------- FONCTIONS -------------------------------
+function chooseVehicule() {
+  document.querySelector("#addressForm").classList.toggle("hide");
+  //document.getElementById("container_affichage_vehicule").classList.remove("hide");
+}
+
 
 function toggleDataVehicule() {
   document.getElementById("data_trajet").classList.add("hide");
@@ -60,8 +64,8 @@ function toggleVehiculeContainer() {
   let icone = document.getElementById("fermeture_icon");
 
   vehicules.classList.toggle("hide");
-  icone.classList.toggle("bx-chevron-down");
-  icone.classList.toggle("bx-chevron-up");
+  icone.classList.toggle("bx-chevron-left");
+  icone.classList.toggle("bx-chevron-right");
 }
 
 function fermerPopup() {

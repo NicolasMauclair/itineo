@@ -36,7 +36,6 @@ async function callCalcCout(distance, vitesse, energie) {
 export async function afficheVehicule(lst_vehicule, distance) {
   let container_liste = document.getElementById("container_affichage_vehicule");
   let container = document.getElementById("container_vehicules");
-  container_liste.classList.remove("hide");
   for (let voiture of lst_vehicule) {
     let containerVehicule = create(
       "div",
@@ -64,6 +63,7 @@ export async function afficheVehicule(lst_vehicule, distance) {
     );
     create("h3", dataContainer, voiture.naming.make, "vehicle-make");
     create("p", dataContainer, voiture.naming.model, "vehicle-model");
+    create("p", dataContainer, "Autonomie : " + voiture.range.chargetrip_range.worst + "km", "vehicle-autonomy");
   }
 
   let container_vehicules = document.getElementById("container_vehicules");
