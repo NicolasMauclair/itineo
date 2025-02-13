@@ -140,6 +140,7 @@
 #addressForm {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
   position: fixed;
   top: 30px;
@@ -150,7 +151,7 @@
   padding: 10px 20px 20px 20px;
   border-radius: 15px;
   background-color: #f9f9f9;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 #vehiculeForm {
@@ -287,7 +288,7 @@
 #addressForm input {
   height: 30px;
   border-radius: 5px;
-  background-color: #f2f4f7;
+  background-color: #eceef1;
   border: none;
   outline: none;
   text-decoration: none;
@@ -314,9 +315,12 @@
   align-items: center;
 }
 
-#send, #back {
+#send, #back{
+  margin: 0 auto;
   width: 70px;
   border-radius: 10px;
+  text-align: center;
+  cursor: pointer;  
   color: white;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
@@ -325,6 +329,42 @@
   outline: none;
   text-decoration: none;
   padding: 6px 10px;
+}
+
+#chargement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15px;
+  gap: 20px;
+  z-index: 999;
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  height: 90px;
+  background-color: #3b3b3b;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 15px;
+  transition: all 0.5s ease-in-out;
+}
+
+.active {
+  transition: all 1s ease-in-out;
+  transform: translate(-50%, 200px) !important;
+}
+
+
+#chargement_text {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#chargement_image {
+  height: 50px;
+  border-radius: 5px;
 }
 
 #send:hover, #back:hover {

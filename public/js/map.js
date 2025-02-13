@@ -20,9 +20,15 @@ export function initializeMap(map) {
 
 // Fonction pour réinitialiser la carte
 export function resetMap(map) {
-  map = initializeMap(map);
+  if (map) {
+    const centre = map.getCenter();
+    const zoom = map.getZoom();
+    map = initializeMap(map);
+    map.setView(centre, zoom);
+  }
   return map;
 }
+
 
 // ---------------------------------------------------------
 // ---------------------------------------------------------

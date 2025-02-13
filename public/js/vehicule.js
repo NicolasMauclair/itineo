@@ -34,7 +34,6 @@ async function callCalcCout(distance, vitesse, energie) {
 
 // Fonction qui affiche la liste des véhicules
 export async function afficheVehicule(lst_vehicule, distance) {
-  let container_liste = document.getElementById("container_affichage_vehicule");
   let container = document.getElementById("container_vehicules");
   for (let voiture of lst_vehicule) {
     let containerVehicule = create(
@@ -63,13 +62,19 @@ export async function afficheVehicule(lst_vehicule, distance) {
     );
     create("h3", dataContainer, voiture.naming.make, "vehicle-make");
     create("p", dataContainer, voiture.naming.model, "vehicle-model");
-    create("p", dataContainer, "Autonomie : " + voiture.range.chargetrip_range.worst + "km", "vehicle-autonomy");
+    create(
+      "p",
+      dataContainer,
+      "Autonomie : " + voiture.range.chargetrip_range.worst + "km",
+      "vehicle-autonomy"
+    );
   }
 
   let container_vehicules = document.getElementById("container_vehicules");
   let vehicule = document.querySelectorAll(".container-vehicule");
   let vehicule_data = document.getElementById("data_trajet");
 
+  /*
   for (let i = 0; i < vehicule.length; i++) {
     vehicule[i].addEventListener("click", function () {
       container_vehicules.classList.add("hide");
@@ -114,10 +119,14 @@ export async function afficheVehicule(lst_vehicule, distance) {
     });
   }
 
+  
+
   try {
     const cout = await callCalcCout(distance, 100.0, 0.2);
     console.log("Coût calculé:", cout);
   } catch (error) {
     console.error("Une erreur est survenue lors du calcul du coût :", error);
   }
+    */
+  return true;
 }
