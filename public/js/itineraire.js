@@ -56,6 +56,7 @@ export async function recherche_trajet(
 
       let lst_vehicule = await recup_liste_vehicule();
       if (lst_vehicule.length > 0) {
+        console.log(lst_vehicule);
         afficheVehicule(lst_vehicule, data_stat["distance"] / 1000);
       }
 

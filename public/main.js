@@ -64,7 +64,7 @@ async function rechercherTrajet(event) {
 
   const adresse_depart = document.getElementById("adresse_depart").value;
   const adresse_arrivee = document.getElementById("adresse_arrivee").value;
-  recherche_trajet(maps, adresse_depart, adresse_arrivee, 50, 10);
+  recherche_trajet(maps, adresse_depart, adresse_arrivee, 200, 10);
 }
 
 function echangerAdresses() {

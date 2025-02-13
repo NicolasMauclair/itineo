@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map with Route</title>
+    <title>Itineo</title>
+    <link rel="icon" type="image/x-icon" href="carte.png">
 
     <!-- Feuille de style principale -->
     <link rel="stylesheet" href="style.css">
@@ -29,7 +30,7 @@
     <div>
 
         <!-- Conteneur affichant les véhicules disponibles -->
-        <div id="container_affichage_vehicule" class="hide">
+        <div id="container_affichage_vehicule">
             <div id="container_vehicules"></div>
             <div id="fermeture_container">
                 <!-- Icône pour fermer la liste des véhicules -->
@@ -58,21 +59,26 @@
 
         <!-- Formulaire pour entrer les adresses de départ et d'arrivée -->
         <form id="addressForm">
+            
+            <h3>Itineo</h3>
             <div id="addressForm_data">
+                <img id="point" src="point.svg">
                 <div id="addressForm_input">
-                    <input type="text" id="adresse_depart" name="adresse_depart" placeholder="Départ" value="Paris"
+                    <input type="search" id="adresse_depart" name="adresse_depart" placeholder="Départ" value="Paris"
                         required>
-                    <input type="text" id="adresse_arrivee" name="adresse_arrivee" placeholder="Arrivée" value="Lyon"
+                    <input type="search" id="adresse_arrivee" name="adresse_arrivee" placeholder="Arrivée" value="Lyon"
                         required>
                 </div>
                 <!-- Boutons pour permuter ou réinitialiser les adresses -->
                 <div id="button_change" aria-label="Permuter les adresses">
-                    <i id="change" class='bx bx-sync'></i>
-                    <i id="reset" class='bx bx-reset'></i>
+                    <img id="change" src="arrow.svg" alt="Permuter les adresses">
                 </div>
             </div>
             <button id="send" type="submit">Envoyer</button>
+            <div class="barre"></div>
         </form>
+
+        
 
     </div>
 

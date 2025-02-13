@@ -88,7 +88,8 @@
 }
 
 /* ----- DATA TRAJET & VEHICULE ----- */
-#data_trajet, #container_vehicules {
+#data_trajet,
+#container_vehicules {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -162,7 +163,8 @@
   color: #333;
 }
 
-.vehicle-model, .vehicle-version {
+.vehicle-model,
+.vehicle-version {
   font-size: 14px;
   margin: 0;
   color: #666;
@@ -190,9 +192,6 @@
   scale: 1.5;
 }
 
-
-
-
 /* ----- SCROLLBAR ----- */
 ::-webkit-scrollbar {
   width: 10px;
@@ -213,30 +212,54 @@
 }
 
 /* ----- FORMULAIRE ----- */
+
+*{
+  font-family: Rubik,sans-serif;
+}
+
 #addressForm {
   display: flex;
   flex-direction: column;
   gap: 10px;
   position: fixed;
   top: 30px;
-  right: 100px;
+  left: 60px;
   z-index: 998;
   height: min-content;
-  width: 230px;
-  padding: 10px;
-  border-radius: 20px;
+  width: min-content;
+  padding: 10px 20px 10px 20px;
+  border-radius: 15px;
   background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 3px 6px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#addressForm h3{
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0;
 }
 
 #addressForm input {
-  height: 20px;
-  border-radius: 10px;
-  border: 1.5px solid rgb(202, 22, 22);
+  height: 30px;
+  border-radius: 5px;
+  background-color: #f2f4f7;
+  border: none;
   outline: none;
   text-decoration: none;
   padding-left: 10px;
   margin-bottom: 5px;
+  font-size: 15px;
+}
+
+#point {
+  width: 20;
+  height: 20px;
+}
+
+.barre {
+  border-top: 2px solid #333;
+  margin: 20px 0;
 }
 
 #addressForm_data {
@@ -263,20 +286,18 @@
   background-color: #ed5949;
 }
 
-#change, #reset {
+#change {
+  width: 20px;
+  height: 20px;
   font-size: 20px;
-  padding: 5px;
+  padding: 8px;
   cursor: pointer;
   color: white;
-  border-radius: 10px;
+  border-radius: 50px;
 }
 
-#change { background-color: #e86658; }
-#reset { display: none; background-color: #59ce51; }
-
-#addressForm input:focus {
-  border-color: #ed5949;
-  box-shadow: 0 0 5px rgba(237, 89, 73, 0.5);
+#change:hover {
+  background-color: #dcd6d5;
 }
 
 .hide {
