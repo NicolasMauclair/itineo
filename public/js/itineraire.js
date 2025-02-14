@@ -16,7 +16,7 @@ export async function recherche_trajet(
   worst_d,
   rayon
 ) {
-  if (errorDisplayed) return null; // Si une erreur a déjà été affichée, on arrête l'exécution
+  if (errorDisplayed) return null;
 
   // Récupère les coordonnées des deux adresses
   const departCoords = await getCoordinates(adresse_depart);

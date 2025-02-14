@@ -6,9 +6,8 @@ from wsgiref.simple_server import make_server
 class VehiculeService(ServiceBase):
     @rpc(Double, Double, _returns=Double)
     def calculer_cout(ctx, distance, consommation):
-        return distance * consommation * 0.2  # Exemple de calcul
+        return distance * consommation * 0.2
 
-# Création de l'application SOAP
 application = Application(
     [VehiculeService],
     tns="spyne.vehicule.service",
@@ -16,7 +15,6 @@ application = Application(
     out_protocol=Soap11(),
 )
 
-# Middleware CORS
 def cors_middleware(app):
     def middleware(environ, start_response):
         def custom_start_response(status, headers, exc_info=None):
@@ -38,7 +36,6 @@ def cors_middleware(app):
     
     return middleware
 
-# Démarrer le serveur avec le middleware CORS
 server = make_server('0.0.0.0', 8000, cors_middleware(WsgiApplication(application)))
 print("✅ Serveur SOAP avec CORS démarré sur http://localhost:8000")
 server.serve_forever()

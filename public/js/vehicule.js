@@ -76,54 +76,6 @@ export async function afficheVehicule(lst_vehicule, distance) {
   let vehicule = document.querySelectorAll(".container-vehicule");
   let vehicule_data = document.getElementById("data_trajet");
 
-  /*
-  for (let i = 0; i < vehicule.length; i++) {
-    vehicule[i].addEventListener("click", function () {
-      container_vehicules.classList.add("hide");
-      vehicule_data.classList.remove("hide");
-
-      Array.from(vehicule_data.children).forEach((child) => {
-        if (!child.id.includes("fermeture_data_vehicule")) {
-          child.remove();
-        }
-      });
-
-      create("h3", vehicule_data, lst_vehicule[i].naming.model);
-      create("p", vehicule_data, lst_vehicule[i].naming.make);
-
-      let container_data1 = create(
-        "div",
-        vehicule_data,
-        null,
-        "container_data"
-      );
-      create("p", container_data1, "Distance :");
-      create("p", container_data1, distance);
-      create("p", container_data1, "km");
-      let container_data2 = create(
-        "div",
-        vehicule_data,
-        null,
-        "container_data"
-      );
-      create("p", container_data2, "Autonomie :");
-      create("p", container_data2, lst_vehicule[i].naming.make);
-      create("p", container_data2, "km");
-      let container_data3 = create(
-        "div",
-        vehicule_data,
-        null,
-        "container_data"
-      );
-      create("p", container_data3, "Chargement :");
-      create("p", container_data3, lst_vehicule[i].naming.make);
-      create("p", container_data3, "mn");
-    });
-  }
-
-  
-  */
-
   return true;
 }
 
@@ -133,7 +85,6 @@ export async function test() {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(cout, "text/xml");
 
-    // Extraire la valeur
     const coutValue = xmlDoc.getElementsByTagName("tns:calculer_coutResult")[0]
       .textContent;
       return coutValue;
