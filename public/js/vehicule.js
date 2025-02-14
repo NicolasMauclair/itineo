@@ -1,32 +1,34 @@
 import { create } from "./utils.js";
 
-async function callCalcCout(distance, vitesse, energie) {
-  const url = "http://localhost:8000/?wsdl";
+async function callCalcCout(distance, consommation) {
   const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
-  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://localhost:8000">
+  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="spyne.vehicule.service">
      <soapenv:Header/>
      <soapenv:Body>
-        <web:calc_cout>
-           <distance>${distance}</distance>
-           <vitesse>${vitesse}</vitesse>
-           <energie>${energie}</energie>
-        </web:calc_cout>
+        <web:calculer_cout>
+           <web:distance>${parseFloat(distance)}</web:distance>
+           <web:consommation>${parseFloat(consommation)}</web:consommation>
+        </web:calculer_cout>
      </soapenv:Body>
   </soapenv:Envelope>`;
 
   try {
-    const response = await fetch("http://localhost:8000/?wsdl", {
+    const response = await fetch("http://localhost:8000", {
       method: "POST",
+      mode: "cors",
       headers: {
-        "Content-Type": "application/soap+xml",
+        "Content-Type": "text/xml",
+        SOAPAction: "",
       },
       body: soapRequest,
     });
+
     if (!response.ok) {
       throw new Error("Failed to fetch: " + response.statusText);
     }
+
     const data = await response.text();
-    console.log("Reponse: ", data);
+    return data;
   } catch (error) {
     console.error("Une erreur est survenue lors du calcul du coût :", error);
   }
@@ -120,13 +122,22 @@ export async function afficheVehicule(lst_vehicule, distance) {
   }
 
   
+  */
 
+  return true;
+}
+
+export async function test() {
   try {
-    const cout = await callCalcCout(distance, 100.0, 0.2);
-    console.log("Coût calculé:", cout);
+    const cout = await callCalcCout(1000, 100.0, 0.2);
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(cout, "text/xml");
+
+    // Extraire la valeur
+    const coutValue = xmlDoc.getElementsByTagName("tns:calculer_coutResult")[0]
+      .textContent;
+      return coutValue;
   } catch (error) {
     console.error("Une erreur est survenue lors du calcul du coût :", error);
   }
-    */
-  return true;
 }

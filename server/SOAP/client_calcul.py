@@ -10,3 +10,4 @@ print(f"Temps calculé : {response_time} heures")
 # Appeler la méthode calc_cout
 response_cout = client.service.calc_cout(15.0, 400.0, 0.2)
 print(f"Coût calculé : {response_cout} euros")
+

@@ -79,3 +79,17 @@ export function dessinePoint(point, map) {
     }
   ).addTo(map);
 }
+
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+
+export function addMarker(map, lat, lng, iconUrl) {
+  const customIcon = L.icon({
+    iconUrl: iconUrl,
+    iconSize: [32, 32],
+    iconAnchor: [7, 32],
+    popupAnchor: [0, -32],
+  });
+
+  L.marker([lat, lng], { icon: customIcon }).addTo(map);
+}
