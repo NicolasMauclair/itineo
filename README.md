@@ -107,7 +107,3 @@ https://commetuveux.azurewebsites.net/getDetailVehicule/5f043d88bc262f1627fc032b
 
 ## Auteurs
 - [NicolasMauclair](https://github.com/NicolasMauclair)
-
-## Licence
-Ce projet est sous licence MIT.
-
