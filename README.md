@@ -1,6 +1,6 @@
-# FastRoute
+# Itineo
 
-FastRoute est une application web permettant de rechercher et d'optimiser des trajets en voiture à partir d'une carte interactive. Elle utilise OpenStreetMap pour afficher les itinéraires et intégrer des fonctionnalités comme la recherche d'itinéraire, la gestion des véhicules disponibles et l'affichage des bornes de recharge à proximité.
+Itineo est une application web permettant de rechercher et d'optimiser des trajets en voiture à partir d'une carte interactive. Elle utilise OpenStreetMap pour afficher les itinéraires et intégrer des fonctionnalités comme la recherche d'itinéraire, la gestion des véhicules disponibles et l'affichage des bornes de recharge à proximité.
 
 ## Installation
 
@@ -19,6 +19,14 @@ FastRoute est une application web permettant de rechercher et d'optimiser des tr
    ```sh
    npm start
    ```
+4. Lancez le service SOAP (si nécessaire) :
+   ```sh
+   source server/env/Scripts/activate
+   ```
+    ```sh
+   python server/SOAP/service.py
+   ```
+
 
 ## Endpoints de l'API
 
@@ -107,7 +115,4 @@ https://commetuveux.azurewebsites.net/getDetailVehicule/5f043d88bc262f1627fc032b
 
 ## Auteurs
 - [NicolasMauclair](https://github.com/NicolasMauclair)
-
-## Licence
-Ce projet est sous licence MIT.
 

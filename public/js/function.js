@@ -1,3 +1,6 @@
+// import dotenv from "dotenv";
+// dotenv.config();
+
 // Fonction pour calculer la distance entre deux coordonnées
 export function calculateDistance(lat1, lon1, lat2, lon2) {
   const earthRadius = 6371000; // Rayon moyen de la Terre en mètres
@@ -28,6 +31,7 @@ export function calculateDistance(lat1, lon1, lat2, lon2) {
 // Fonction pour obtenir les coordonnées d'une adresse
 export async function getCoordinates(address) {
   const api_key = "5b3ce3597851110001cf62481cf3c27900c544c0a862d7868924615a";
+  // const api_key = ORS_API_KEY;
   const url = `https://api.openrouteservice.org/geocode/search?api_key=${api_key}&text=${encodeURIComponent(
     address
   )}`;

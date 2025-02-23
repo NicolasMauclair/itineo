@@ -2,15 +2,18 @@ import express from "express";
 import { createClient, cacheExchange, fetchExchange } from "@urql/core";
 import cors from 'cors';
 import { vehicleListQuery, getVehicleDetailsQuery } from "./queries.js";
+import dotenv from "dotenv";
 
 const app = express();
 app.use(cors());
-const port = 3001;
+const port = process.env.PORT || 3001;
+
+dotenv.config();
 
 // Configuration des en-têtes pour le client GraphQL
 const headers = {
-  "x-client-id": "677e4def4dd456c0206695fa",
-  "x-app-id": "677e4def4dd456c0206695fc",
+  "x-client-id": process.env.X_CLIENT_ID,
+  "x-app-id": process.env.X_APP_ID,
 };
 
 // Initialisation du client GraphQL

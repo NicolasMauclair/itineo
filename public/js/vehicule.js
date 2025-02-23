@@ -35,7 +35,7 @@ async function callCalcCout(distance, consommation) {
 }
 
 // Fonction qui affiche la liste des véhicules
-export async function afficheVehicule(lst_vehicule, distance) {
+export async function afficheVehicule(lst_vehicule) {
   let container = document.getElementById("container_vehicules");
   for (let voiture of lst_vehicule) {
     let containerVehicule = create(
@@ -72,23 +72,5 @@ export async function afficheVehicule(lst_vehicule, distance) {
     );
   }
 
-  let container_vehicules = document.getElementById("container_vehicules");
-  let vehicule = document.querySelectorAll(".container-vehicule");
-  let vehicule_data = document.getElementById("data_trajet");
-
   return true;
-}
-
-export async function test() {
-  try {
-    const cout = await callCalcCout(1000, 100.0, 0.2);
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(cout, "text/xml");
-
-    const coutValue = xmlDoc.getElementsByTagName("tns:calculer_coutResult")[0]
-      .textContent;
-      return coutValue;
-  } catch (error) {
-    console.error("Une erreur est survenue lors du calcul du coût :", error);
-  }
 }

@@ -1,35 +1,37 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
+  import path from "path";
+  import { fileURLToPath } from "url";
 import cors from "cors";
-
-// Importer les fonctions
+import rateLimit from "express-rate-limit";
 import {
   calculateDistance,
   getCoordinates,
   getItineraire,
-  recup_liste_vehicule,
-  getPointProche,
-  getBorneProximate,
 } from "../public/js/function.js";
 
-// Créer l'application Express
-const app = express();
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Trop de requetes"
+});
 
-// Définir le port
+
+const app = express();
 const port = process.env.PORT || 3000;
 
-// Permettre les requêtes CORS
+// Permet les requêtes CORS
 app.use(cors());
 
-// Récupérer le chemin du fichier courant pour gérer __dirname
+// Evite les attaques DDOS
+app.use(limiter);
+
+// Récupère le chemin du fichier courant pour gérer __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Servir les fichiers statiques du dossier public
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Route d'accueil
+// Route vers la page web
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
