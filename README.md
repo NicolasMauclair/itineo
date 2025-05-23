@@ -1,30 +1,19 @@
 # Itineo
 
 Itineo est une application web permettant de rechercher et d'optimiser des trajets en voiture à partir d'une carte interactive. Elle utilise OpenStreetMap pour afficher les itinéraires et intégrer des fonctionnalités comme la recherche d'itinéraire, la gestion des véhicules disponibles et l'affichage des bornes de recharge à proximité.
+L’ensemble de l’application est conteneurisé avec Docker, ce qui permet une mise en route rapide et isolée de l’environnement.
 
 ## Installation
 
 1. Clonez le dépôt :
    ```sh
-   git clone https://github.com/votre-repo/FastRoute.git
-   cd FastRoute
+   git clone https://github.com/NicolasMauclair/itineo.git
+   cd itineo
    ```
 
-2. Installez les dépendances :
+2. Lancez le conteneur Docker :
    ```sh
-   npm install
-   ```
-
-3. Lancez le serveur :
-   ```sh
-   npm start
-   ```
-4. Lancez le service SOAP (si nécessaire) :
-   ```sh
-   source server/env/Scripts/activate
-   ```
-    ```sh
-   python server/SOAP/service.py
+   docker-compose up --build
    ```
 
 
@@ -40,8 +29,7 @@ GET /calculateDistance?lat1={latitude1}&lon1={longitude1}&lat2={latitude2}&lon2=
 
 **Exemples :**
 ```
-http://localhost:3000/calculateDistance?lat1=10.0&lon1=1.5&lat2=45.1&lon2=2.0
-https://commetuveux.azurewebsites.net/calculateDistance?lat1=10.0&lon1=1.5&lat2=45.1&lon2=2.0
+http://localhost:3001/calculateDistance?lat1=10.0&lon1=1.5&lat2=45.1&lon2=2.0
 ```
 
 ---
@@ -56,8 +44,7 @@ GET /adressToCoords?adresse={adresse}
 
 **Exemples :**
 ```
-http://localhost:3000/adressToCoords?adresse=Paris
-https://commetuveux.azurewebsites.net/adressToCoords?adresse=Paris
+http://localhost:3001/adressToCoords?adresse=Paris
 ```
 
 ---
@@ -72,8 +59,7 @@ GET /getItineraire?ad1={latitude1,longitude1}&ad2={latitude2,longitude2}
 
 **Exemples :**
 ```
-http://localhost:3000/getItineraire?ad1=5.911581,45.693458&ad2=4.835571,45.732398
-https://commetuveux.azurewebsites.net/getItineraire?ad1=5.911581,45.693458&ad2=4.835571,45.732398
+http://localhost:3001/getItineraire?ad1=5.911581,45.693458&ad2=4.835571,45.732398
 ```
 
 ---
@@ -88,8 +74,7 @@ GET /getListeVehicule
 
 **Exemples :**
 ```
-http://localhost:3000/getListeVehicule
-https://commetuveux.azurewebsites.net/getListeVehicule
+http://localhost:3001/getListeVehicule
 ```
 
 ---
@@ -102,16 +87,11 @@ Renvoie les informations détaillées d'un véhicule spécifique.
 GET /getDetailVehicule/{id_vehicule}
 ```
 
-**Exemples :**
-```
-http://localhost:3000/getDetailVehicule/5f043d88bc262f1627fc032b
-https://commetuveux.azurewebsites.net/getDetailVehicule/5f043d88bc262f1627fc032b
-```
-
 ## Technologies utilisées
 - **Frontend :** HTML, CSS, JavaScript
 - **Backend :** Node.js, Express
 - **Cartographie :** OpenStreetMap
+- **Conteneurisation** : Docker
 
 ## Auteurs
 - [NicolasMauclair](https://github.com/NicolasMauclair)
