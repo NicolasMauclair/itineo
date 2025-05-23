@@ -4,11 +4,11 @@ import cors from 'cors';
 import { vehicleListQuery, getVehicleDetailsQuery } from "./queries.js";
 import dotenv from "dotenv";
 
+dotenv.config();
+
 const app = express();
 app.use(cors());
-const port = process.env.PORT || 3001;
-
-dotenv.config();
+const port = process.env.PORT_API_VEHICULES;
 
 // Configuration des en-têtes pour le client GraphQL
 const headers = {
@@ -87,5 +87,5 @@ export const getVehicleDetails = async (vehicleId) => {
 
 // Lancer le serveur
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Serveur API des véhicules en écoute sur http://localhost:${port}`);
 });

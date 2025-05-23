@@ -1,41 +1,8 @@
 import { create } from "./utils.js";
 
-async function callCalcCout(distance, consommation) {
-  const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
-  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="spyne.vehicule.service">
-     <soapenv:Header/>
-     <soapenv:Body>
-        <web:calculer_cout>
-           <web:distance>${parseFloat(distance)}</web:distance>
-           <web:consommation>${parseFloat(consommation)}</web:consommation>
-        </web:calculer_cout>
-     </soapenv:Body>
-  </soapenv:Envelope>`;
-
-  try {
-    const response = await fetch("http://localhost:8000", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "text/xml",
-        SOAPAction: "",
-      },
-      body: soapRequest,
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch: " + response.statusText);
-    }
-
-    const data = await response.text();
-    return data;
-  } catch (error) {
-    console.error("Une erreur est survenue lors du calcul du coût :", error);
-  }
-}
-
 // Fonction qui affiche la liste des véhicules
 export async function afficheVehicule(lst_vehicule) {
+  console.log(lst_vehicule)
   let container = document.getElementById("container_vehicules");
   for (let voiture of lst_vehicule) {
     let containerVehicule = create(

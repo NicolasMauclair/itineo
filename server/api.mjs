@@ -8,6 +8,7 @@ import {
   getCoordinates,
   getItineraire,
 } from "../public/js/function.js";
+import dotenv from "dotenv";
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -15,9 +16,10 @@ const limiter = rateLimit({
   message: "Trop de requetes"
 });
 
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT_API;
 
 // Permet les requêtes CORS
 app.use(cors());
@@ -75,7 +77,7 @@ app.get("/getItineraire", async (req, res) => {
 // Endpoints - Récupérer la liste des véhicules
 app.get("/getListeVehicule", async (req, res) => {
   try {
-    const response = await fetch("http://localhost:3001/api/vehicles");
+    const response = await fetch("http://localhost:" + process.env.PORT_API_VEHICULES + "/api/vehicles");
     const result = await response.json();
     res.status(200).json({ vehicles: result });
   } catch (error) {
@@ -90,7 +92,7 @@ app.get("/getListeVehicule", async (req, res) => {
 app.get('/getDetailVehicule/:vehicleId', async (req, res) => {
   try {
     const { vehicleId } = req.params;
-    const response = await fetch(`http://localhost:3001/api/vehicles/${vehicleId}`);
+    const response = await fetch("http://localhost:" + process.env.PORT_API_VEHICULES + "/api/vehicles/${vehicleId}");
     const result = await response.json();
     res.status(200).json(result);
   } catch (error) {

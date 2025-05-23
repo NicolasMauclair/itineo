@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Récupération de la liste des véhicules disponibles
     let lst_vehicule = await recup_liste_vehicule();
+    console.log(lst_vehicule);
     
     // Vérification de la présence de véhicules
     if (lst_vehicule.length > 0) {

@@ -1,6 +1,3 @@
-// import dotenv from "dotenv";
-// dotenv.config();
-
 // Fonction pour calculer la distance entre deux coordonnées
 export function calculateDistance(lat1, lon1, lat2, lon2) {
   const earthRadius = 6371000; // Rayon moyen de la Terre en mètres
@@ -171,7 +168,7 @@ export async function recup_liste_vehicule() {
   let res = [];
   try {
     // Récupération de la liste des véhicules
-    const response = await fetch("http://localhost:3001/api/vehicles");
+    const response = await fetch("http://localhost:3002/api/vehicles");
     if (!response.ok) {
       throw new Error(
         `Erreur HTTP lors de la récupération des véhicules : ${response.status}`
@@ -183,7 +180,7 @@ export async function recup_liste_vehicule() {
     for (const vehicle of vehicles) {
       try {
         const detailsResponse = await fetch(
-          `http://localhost:3001/api/vehicles/${vehicle.id}`
+          `http://localhost:3002/api/vehicles/${vehicle.id}`
         );
         if (!detailsResponse.ok) {
           throw new Error(

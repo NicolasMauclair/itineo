@@ -6,33 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Itineo</title>
     <link rel="icon" type="image/x-icon" href="static/carte.png">
-
-    <!-- Feuille de style principale -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Feuille de style pour Leaflet (librairie cartographique) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-    <!-- Icônes Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <!-- Script Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <!-- Script principal en module -->
     <script type="module" src="main.js"></script>
-
-    <!-- Librairie Axios pour les requêtes HTTP -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div>
-
-        <!-- Overlay utilisé pour masquer le contenu en arrière-plan -->
         <div id="overlay"></div>
-
-        <!-- Pop-up d'erreur affiché en cas de problème avec l'itinéraire -->
         <div id="popup_error" class="hide">
             <div>
                 <i class='bx bxs-error'></i>
@@ -42,13 +26,10 @@
             <button id="button_error">Retour</button>
         </div>
 
-        <!-- Conteneur des informations de trajet -->
         <div id="data_trajet" class="hide">
-            <!-- Bouton pour fermer les informations -->
             <i id="fermeture_data_vehicule" class='bx bx-chevron-left'></i>
         </div>
 
-        <!-- Formulaire pour entrer les adresses de départ et d'arrivée -->
         <div id="addressForm">
 
             <h3>Itineo</h3>
@@ -60,21 +41,17 @@
                     <input type="search" id="adresse_arrivee" name="adresse_arrivee" placeholder="Arrivée" value="Lyon"
                         required>
                 </div>
-                <!-- Boutons pour permuter ou réinitialiser les adresses -->
                 <div id="button_change" aria-label="Permuter les adresses">
                     <img id="change" src="static/arrow.svg" alt="Permuter les adresses">
                 </div>
             </div>
             <button id="send">Suivant</button>
-            <!--<div class="barre"></div>-->
         </div>
 
         <div id="vehiculeForm" class="hide">
             <h3>Itineo</h3>
-            <!-- Conteneur affichant les véhicules disponibles -->
             <div id="container_vehicules"></div>
             <div id="fermeture_container">
-                <!-- Icône pour fermer la liste des véhicules -->
                 <i id="fermeture_icon" class='bx bx-chevron-right'></i>
             </div>
             <div id="back">Retour</div>
@@ -90,7 +67,6 @@
 
     </div>
 
-    <!-- Conteneur de la carte Leaflet -->
     <div id="map" style="width: 100%; height: 700px;"></div>
 </body>
 

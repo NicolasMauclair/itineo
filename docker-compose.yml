@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  itineo-app:
+    build: .
+    ports:
+      - "${PORT_API}:${PORT_API}"
+      - "${PORT_API_VEHICULES}:${PORT_API_VEHICULES}"
+    env_file:
+      - .env
