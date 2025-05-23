@@ -1,6 +1,7 @@
 # Itineo
 
-Itineo est une application web permettant de rechercher et d'optimiser des trajets en voiture à partir d'une carte interactive. Elle utilise OpenStreetMap pour afficher les itinéraires et intégrer des fonctionnalités comme la recherche d'itinéraire, la gestion des véhicules disponibles et l'affichage des bornes de recharge à proximité.\n
+Itineo est une application web permettant de rechercher et d'optimiser des trajets en voiture à partir d'une carte interactive. Elle utilise OpenStreetMap pour afficher les itinéraires et intégrer des fonctionnalités comme la recherche d'itinéraire, la gestion des véhicules disponibles et l'affichage des bornes de recharge à proximité.
+
 L’ensemble de l’application est conteneurisé avec Docker, ce qui permet une mise en route rapide et isolée de l’environnement.
 
 ## Installation
